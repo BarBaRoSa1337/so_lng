@@ -6,13 +6,30 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:48 by achakour          #+#    #+#             */
-/*   Updated: 2024/03/17 12:14:50 by achakour         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:06:00 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
-#include "get_next_line/get_next_line.h"
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 13
+# endif
+
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+
+void	ft_strlcpy(char *dst, char *src, size_t dstsize);
+int     is_valid_map(char **map, int row, int sides);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strchr(char *s, char c);
+char    **get_map(char *file_name);
+size_t	ft_strlen(const char *s);
+char	*get_next_line(int fd);
+char	*ft_strdup(char *str);
+char	*cut_str(char *s);
 
 #endif

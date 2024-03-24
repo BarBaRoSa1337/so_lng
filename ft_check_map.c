@@ -6,40 +6,54 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/03/17 12:15:38 by achakour         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:02:17 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char    *get_map(char *file_name)
-{
-    char    **buff;
-    char    *tmp;
-    int     len;
-    int     fd;
-    int     i;
+// void    ft_fill_buff(char **buff, int fd, int lines)
+// {
+//     int i;
 
-    i = 0;
-    len = 0;
-    fd = open(file_name, O_WRONLY);
-    tmp = get_next_line(fd);
-    if (!tmp)
-        return (NULL);
-    while (tmp)
-    {
-        tmp = get_next_line(fd);
-        free (tmp);
-        ++len;
-        ++i;
-    }
-    if (len > 0)
-        buff = (char *)malloc(sizeof(char) * len + 1);
-    if (!buff)
-        return (NULL);
-    ft_fill_buff(buff, len);
-    return (buff);
-}
+//     // lseek(fd, );
+//     i = 0;
+//     while (i < lines)
+//     {
+//         buff[i] = get_next_line(fd);
+//         ++i;
+//     }
+//     buff[i] = NULL;
+// }
+
+// char    *get_map(char *file_name)
+// {
+//     char    **buff;
+//     char    *tmp;
+//     int     len;
+//     int     fd;
+//     int     i;
+
+//     i = 1;
+//     len = 0;
+//     fd = open(file_name, O_WRONLY);
+//     tmp = get_next_line(fd);
+//     if (!tmp)
+//         return (NULL);
+//     while (tmp)
+//     {
+//         tmp = get_next_line(fd);
+//         free (tmp);
+//         ++len;
+//         ++i;
+//     }
+//     if (len > 0)
+//         buff = (char *)malloc(sizeof(char) * len + 1);
+//     if (!buff)
+//         return (NULL);
+//     ft_fill_buff(buff, fd, i);
+//     return (buff);
+// }
 
 int check_coins(char **map)
 {
@@ -77,7 +91,7 @@ int check_exit_player(char **map)
     player = 0;
     while (map[++i])
     {
-        j = -1;
+        j = 0;
         while (map[i][j])
         {
             if (map[i][j] == 'P')
@@ -94,13 +108,14 @@ int check_exit_player(char **map)
     return (1);
 }
 
+                            //n_lines //ft_strlen(map[0])
 int is_valid_map(char **map, int row, int sides)
 {
     int i;
     int j;
 
-    i = 0;
-    while (map[i])
+    i = -1;
+    while (map[++i])
     {
         j = 0;
         while (map[i][j])
@@ -113,11 +128,12 @@ int is_valid_map(char **map, int row, int sides)
             {
                 return (0);
             }
-            else if (!check_exit_player(map) || !chek_coins(map))
+            else if (!check_exit_player(map) || !check_coins(map))
+            {
                 return (0);
+            }
             ++j;
         }
-        ++i;
     }
     return (1);
 }
