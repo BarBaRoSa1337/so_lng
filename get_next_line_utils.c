@@ -6,13 +6,13 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 09:10:35 by achakour          #+#    #+#             */
-/*   Updated: 2024/03/22 17:05:40 by achakour         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:47:22 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
 	const char	*p;
 
