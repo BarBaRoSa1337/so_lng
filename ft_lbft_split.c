@@ -6,27 +6,11 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:13:18 by achakour          #+#    #+#             */
-/*   Updated: 2024/04/08 17:22:21 by achakour         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:08:25 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-// void	ft_strlcpy(char *dst, char *src, size_t dstsize)
-// {
-// 	size_t	i;
-
-// 	if (dstsize != 0)
-// 	{
-// 		i = 0;
-// 		while (*(src + i) != '\0' && --dstsize)
-// 		{
-// 			*(dst + i) = *(src + i);
-// 			++i;
-// 		}
-// 		*(dst + i) = '\0';
-// 	}
-// }
 
 static size_t	ft_count_words(char *str, int c)
 {

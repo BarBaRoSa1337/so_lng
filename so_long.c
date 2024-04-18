@@ -6,31 +6,40 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:10:25 by achakour          #+#    #+#             */
-/*   Updated: 2024/04/15 15:02:42 by achakour         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:21:00 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+char    **get_map(int fd)
+{
+    char    **map;
+    char    *buff;
+    char    *tmp;
+
+    buff = NULL;
+    tmp = get_next_line(fd);
+    while (tmp)
+    {
+        buff = ft_strjoin(buff, tmp);
+        free (tmp);
+        tmp = get_next_line(fd);
+    }
+    close(fd);
+    buff = ft_strjoin(buff, "\n");
+    map = ft_split(buff, '\n');
+    return (free(buff), map);
+}
+
 int main(int ac, char **ar)
 {
     char    **map;
-    // int     lines;
-    (void)ac;
 
-    map = get_map(ar[1]);
-    (void)map;
-    // printf("%s\n", map[0]);
-    // lines = count_lines(map);
-    // if (is_valid_map(map, lines, ft_strlen(map[0])))
-    // {
-        
-    // }
-    // int i = 0;
-    // while (map[i])
-    // {
-    //    printf("%s\n", map[i]);
-    //    ++i;
-    // }
+    if (ac != 2)
+        return (1);
+    map =  get_map(open(ar[1], O_RDONLY));
+    printf ("%d\n", is_valid_map(map, ft_count_lines(map), ft_strlen(map[0])));
+    // printf ("%s", map[0]);
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 09:10:35 by achakour          #+#    #+#             */
-/*   Updated: 2024/04/08 16:47:22 by achakour         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:53:48 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_strdup(char *str)
 	p = (char *)malloc(sizeof(char) * len + 1);
 	if (p == NULL)
 		return (NULL);
-	ft_strlcpy(p, (char *)str, len + 1);
+	ft_strlcpy(p, str, len + 1);
 	return (p);
 }
 
@@ -66,10 +66,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	total;
 	char	*buff;
 
-	if (!s1 && !s2)
-		return (NULL);
 	if (!s1 && s2)
 		return (ft_strdup(s2));
+	if (!s1 && !s2)
+		return (NULL);
 	s1len = ft_strlen(s1);
 	s2len = ft_strlen(s2);
 	total = s1len + s2len + 1;

@@ -6,29 +6,11 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/04/15 15:05:23 by achakour         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:19:13 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-char    **get_map(char *file)
-{
-    char    **map;
-    char    *buff;
-    char    *tmp;
-    int     fd;
-
-    fd = open(file, O_RDONLY);
-    while ((tmp = get_next_line(fd)))
-    {
-        buff = ft_strjoin(buff, tmp);
-        free (tmp);
-    }
-    if (buff)
-        map = ft_split(buff, '\n');
-    return(free (buff), map);
-}
 
 int check_coins(char **map)
 {
@@ -79,9 +61,9 @@ int check_dimentions(char **map)
     int lines;
     int i;
 
-    i = 0;
+    i = -1;
     lines = ft_count_lines(map);
-    line_len = ft_strlen(map[i]);
+    line_len = ft_strlen(map[i + 1]);
     while (map[++i])
     {
         if (ft_strlen(map[i]) != line_len)
@@ -121,36 +103,35 @@ int check_exit_player(char **map)
             ++j;
         }
     }
-    if (player > 1 || exit > 1)
+    if ((player > 1 || exit > 1) || (player == 0 || exit == 0))
         return (0);
     return (1);
 }
 
-int is_valid_map(char **map, int line_count, int line_len)
+int is_valid_map(char **map, int lines, int line_len)
 {
     int i;
     int j;
 
     i = 0;
+    // if (!check_exit_player(map) || !check_coins(map) || check_dimentions(map))
+    // {
+    //     return (0);
+    // }
+    printf("lines = %d , line_len = %d", lines, line_len);
     while (map[i])
     {
         j = 0;
         while (map[i][j])
         {
-            if ((i == 0 || i == line_count) && map[i][j] != '1')
+            if ((i == 0 || i == lines) && map[i][j] != '1')
             {
-                printf("%c\n", map[i][j]);
                 return (0);
             }
             else if ((j == 0 || j == line_len) && map[i][j] != '1')
             {
-                printf("%c\n", map[i][j]);
                 return (0);
             }
-            // if (!check_exit_player(map) || !check_coins(map) || check_dimentions(map))
-            // {
-            //     return (0);
-            // }
             ++j;
         }
         ++i;

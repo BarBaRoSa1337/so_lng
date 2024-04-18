@@ -4,7 +4,7 @@ SRCS	= ft_check_map.c ft_lbft_split.c get_next_line_utils.c get_next_line.c floo
 
 OBJ = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS =  #-fsanitize=address -g3#-Wall -Wextra -Werror
 NAME = so_long
 AR = ar rcs
 RM = rm -f
