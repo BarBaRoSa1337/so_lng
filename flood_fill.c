@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:10:44 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/03 10:48:00 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:19:08 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int ft_flood_fill(int x, int y, t_solong *tracker)
     char    **map;
 
     map = copy_map(tracker->map);
+    map[x][y] = 'X';
     if (map[x + 1][y] != '1' && map[x + 1][y] != 'X')
         ft_flood_fill(x + 1, y, tracker);
     else if (map[x - 1][y] != '1' && map[x - 1][y] != 'X')
@@ -111,5 +112,6 @@ int ft_flood_fill(int x, int y, t_solong *tracker)
         ft_flood_fill(x, y + 1, tracker);
     else if (map[x][y - 1] != '1' && map[x][y - 1] != 'X')
         ft_flood_fill(x, y - 1, tracker);
-    map[x][y] = 'X';
+    else
+        return (0);
 }
