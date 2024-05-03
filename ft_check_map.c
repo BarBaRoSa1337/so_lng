@@ -6,39 +6,11 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/04/19 09:38:13 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/03 10:12:39 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int check_coins(char **map)
-{
-    int coins;
-    int i;
-    int j;
-
-    i = 0;
-    coins = 0;
-    while (map[i])
-    {
-        j = 0;
-        while (map[i][j])
-        {
-            if (map[i][j] == 'C')
-            {
-                ++coins;
-            }
-            ++j;
-        }
-        ++i;
-    }
-    if (coins == 0)
-    {
-        return (0);   
-    }
-    return (1);
-}
 
 int ft_count_lines(char **map)
 {
@@ -79,42 +51,54 @@ int check_dimentions(char **map)
     return (1);
 }
 
-int check_exit_player(char **map)
+t_solong    *locate_struct(int fd)
 {
-    int player;
-    int exit;
+    t_solong    *tracker;
+
+    tracker = malloc(sizeof(t_solong));
+    if (!tracker)
+        return (NULL);
+    tracker->map = get_map(fd);
+    tracker->exit = 0;
+    tracker->coins = 0;
+    tracker->player = 0;
+    get_player_position(tracker->map, tracker);
+    return (tracker);
+}
+
+t_solong    *check_elements(char **map, t_solong *tracker)
+{
     int i;
     int j;
-
-    i = -1;
-    exit = 0;
-    player = 0;
-    while (map[++i])
+   
+    i = 0;
+    while (map[i])
     {
         j = 0;
         while (map[i][j])
         {
-            if (map[i][j] == 'P')
-            {
-                player += 1;
-            }
+            if (map[i][j] == 'C')
+                tracker->coins += 1;
             else if (map[i][j] == 'E')
-                exit += 1;
+                tracker->exit += 1;
+            else if (map[i][j] == 'P')
+                tracker->player += 1;
             ++j;
         }
+        ++i;
     }
-    if ((player > 1 || exit > 1) || (player == 0 || exit == 0))
-        return (0);
+    if (tracker->coins < 1 || tracker->player != 1 || tracker->exit != 1)
+        return (0);   
     return (1);
 }
 
-int is_valid_map(char **map, int lines, int line_len)
+int is_valid_map(char **map, int lines, int line_len, t_solong *tracker)
 {
     int i;
     int j;
 
     i = -1;
-    if (!check_exit_player(map) || !check_coins(map) || !check_dimentions(map))
+    if (!check_elements(map, tracker))
     {
         return (0);
     }

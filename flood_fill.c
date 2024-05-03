@@ -6,21 +6,32 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:10:44 by achakour          #+#    #+#             */
-/*   Updated: 2024/04/19 10:29:26 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/03 10:48:00 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_solong    *ft_struct(t_solong *track, char element)
+void    get_player_position(char **map, t_solong *tracker)
 {
-    if (element == 'C')
-        track->coins++;
-    else if (element == 'E')
-        track->exit++;
-    else if (element == 'P')
-        track->player++;
-    return (track);
+    int i;
+    int j;
+
+    i = 0;
+    while (map[i])
+    {
+        j = 0;
+        while (map[i][j])
+        {
+            if (map[i][j] == 'P')
+            {
+                tracker->x_player = i;
+                tracker->y_player = j;
+            }
+            ++j;
+        }
+        ++i;
+    }
 }
 
 t_solong    *locate_struct(void)
@@ -33,31 +44,72 @@ t_solong    *locate_struct(void)
     return (p);
 }
 
-t_solong    *ft_flood_fill(char **map, int x, int y)
+char    *copy_map(char **map)
 {
-    t_solong    *track;
+    int     map_len;
+    char    **copy;
+    int     lines;
+    int     i;
+    int     j;
 
+    i = -1;
+    map_len = ft_strlen(map[0]);
+    lines = ft_count_lines(map);
+    copy = malloc(sizeof(char *) * (lines + 1));
+    while (map[++i])
+        copy[i] = malloc(map_len + 1);
+    i = 0;
+    while (map[i])
+    {
+        j = 0;
+        while (map[i][j])
+        {
+            copy[i][j] = map[i][j];
+            ++j;
+        }
+        copy[i][j + 1] = '\0';
+        ++i;
+    }
+    return (copy);
+}
+
+int check_map(char **map)
+{
+    int found;
+    int i;
+    int j;
+
+
+    i = 0;
+    found = 0;
+    while (map[i])
+    {
+        j = 0;
+        while (map[i][j])
+        {
+            if (map[i][j] == 'C' || map[i][j] == 'P' || map[i][j] == 'E')
+                found++;
+            ++j;
+        }
+        ++i;
+    }
+    if (found == 0)
+        return (1);
+    return (0);
+}
+
+int ft_flood_fill(int x, int y, t_solong *tracker)
+{
+    char    **map;
+
+    map = copy_map(tracker->map);
+    if (map[x + 1][y] != '1' && map[x + 1][y] != 'X')
+        ft_flood_fill(x + 1, y, tracker);
+    else if (map[x - 1][y] != '1' && map[x - 1][y] != 'X')
+        ft_flood_fill(x - 1, y, tracker);
+    else if (map[x][y + 1] != '1' && map[x][y + 1] != 'X')
+        ft_flood_fill(x, y + 1, tracker);
+    else if (map[x][y - 1] != '1' && map[x][y - 1] != 'X')
+        ft_flood_fill(x, y - 1, tracker);
     map[x][y] = 'X';
-    track = locate_struct();
-    if (map[x + 1][y] && map[x + 1][y] != '1' && map[x + 1][y] != '2')
-    {
-        ft_struct(track, map[x + 1][y]);
-        return (ft_flood_fill(map, x + 1, y));
-    }
-    else if (map[x - 1][y] != '1' && map[x - 1][y] == '2')
-    {
-        ft_struct(track, map[x + 1][y]);
-        return (ft_flood_fill( map, x - 1, y));
-    }
-    else if (map[x][y + 1] && map[x][y + 1] != '1' && map[x][y + 1] != '2')
-    {
-        ft_struct(track, map[x + 1][y]);
-        return (ft_flood_fill(map, x, y + 1));
-    }
-    else if (map[x][y - 1] && map[x][y - 1] != '1' && map[x][y - 1] != '2')
-    {
-        ft_struct(track, map[x + 1][y]);
-        return (ft_flood_fill(map, x, y - 1));
-    }
-    return (track);
 }
