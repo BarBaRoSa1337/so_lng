@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/04/18 13:19:13 by achakour         ###   ########.fr       */
+/*   Updated: 2024/04/19 09:38:13 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int check_coins(char **map)
         }
         ++i;
     }
-    if (coins > 0)
+    if (coins == 0)
     {
-        return (1);   
+        return (0);   
     }
-    return (0);
+    return (1);
 }
 
 int ft_count_lines(char **map)
@@ -113,28 +113,26 @@ int is_valid_map(char **map, int lines, int line_len)
     int i;
     int j;
 
-    i = 0;
-    // if (!check_exit_player(map) || !check_coins(map) || check_dimentions(map))
-    // {
-    //     return (0);
-    // }
-    printf("lines = %d , line_len = %d", lines, line_len);
-    while (map[i])
+    i = -1;
+    if (!check_exit_player(map) || !check_coins(map) || !check_dimentions(map))
+    {
+        return (0);
+    }
+    while (map[++i])
     {
         j = 0;
         while (map[i][j])
         {
-            if ((i == 0 || i == lines) && map[i][j] != '1')
+            if ((i == 0 || i == (lines - 1)) && map[i][j] != '1')
             {
                 return (0);
             }
-            else if ((j == 0 || j == line_len) && map[i][j] != '1')
+            else if ((j == 0 || j == line_len - 1) && map[i][j] != '1')
             {
                 return (0);
             }
             ++j;
         }
-        ++i;
     }
     return (1);
 }
