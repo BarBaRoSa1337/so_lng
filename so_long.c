@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:10:25 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/03 10:15:23 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/04 11:52:38 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ char    **get_map(int fd)
 int main(int ac, char **ar)
 {
     t_solong    *tracker;
-    char        **map;
+    // char        **map;
 
-    if (ac != 2)
-        return (1);
-    tracker = locate_struct(open(ar[1], O_RDONLY));
-    if (!is_valid_map(tracker->map, ft_count_lines(map), ft_strlen(map[0]), tracker) || !ft_flood_fill(tracker))
-        return (free_map(&tracker->map), 1);// free struct
+    // if (ac != 2)
+    //     return (1);
+    tracker = locate_struct(open("v_map01.ber", O_RDONLY));
+    if (!is_valid_map(tracker->map, ft_count_lines(tracker->map), ft_strlen(tracker->map[0]), tracker))
+        printf("not valid");
+    // is_valid_path(tracker->map, tracker);
     return (0);
 }

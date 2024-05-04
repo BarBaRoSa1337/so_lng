@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/03 10:12:39 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/04 11:54:33 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_solong    *locate_struct(int fd)
     return (tracker);
 }
 
-t_solong    *check_elements(char **map, t_solong *tracker)
+int    check_elements(char **map, t_solong *tracker)
 {
     int i;
     int j;
@@ -98,7 +98,7 @@ int is_valid_map(char **map, int lines, int line_len, t_solong *tracker)
     int j;
 
     i = -1;
-    if (!check_elements(map, tracker))
+    if (!check_elements(map, tracker) || !check_dimentions(map))
     {
         return (0);
     }
