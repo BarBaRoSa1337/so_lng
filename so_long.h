@@ -6,17 +6,15 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:48 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/06 14:17:29 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:09:15 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
-# ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 13
-# endif
-
+#   define PXL 50
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -25,6 +23,7 @@
 
 typedef struct s_img
 {
+    void    *win;
     void    *mlx;
     void    *back_ground;
     void    *o_door;
@@ -45,6 +44,8 @@ typedef struct s_solong
     int     coins;
     int     exit;
     int     fd;
+    int     x;
+    int     y;
 }   t_solong;
 
 int     is_valid_map(char **map, int lines, int line_len, t_solong *tracker);
@@ -52,7 +53,7 @@ void    get_player_position(char **map, t_solong *tracker);
 void	ft_strlcpy(char *dst, char *src, size_t dstsize);
 int     is_valid_path(char **map, t_solong *tracker);
 char	**ft_split(char const *s, char c);
-int import_xpms(void *mlx, t_img img);
+int import_xpms(void *mlx, void *win, t_img *img);
 int ft_handle_esc(int keycode, void *ptr);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(char *s, char c);

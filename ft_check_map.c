@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/06 12:25:12 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:22:02 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ t_solong    *locate_struct(int fd)
     tracker->exit = 0;
     tracker->coins = 0;
     tracker->player = 0;
+    tracker->y = ft_strlen(tracker->map[0]);
     get_player_position(tracker->map, tracker);
+    tracker->x = ft_count_lines(tracker->map);
     return (tracker);
 }
 
