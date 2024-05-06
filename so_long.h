@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:48 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/04 11:37:55 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/06 14:17:29 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,20 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-#include "mlx.h"
+#include "./minilibx-linux/mlx.h"
+
+typedef struct s_img
+{
+    void    *mlx;
+    void    *back_ground;
+    void    *o_door;
+    void    *c_door;
+    void    *player;
+    void    *bomb;
+    void    *wall;
+    int     img_w;
+    int     img_h;
+}       t_img;
 
 typedef struct s_solong
 {
@@ -31,21 +44,23 @@ typedef struct s_solong
     char    **map;
     int     coins;
     int     exit;
+    int     fd;
 }   t_solong;
 
 int     is_valid_map(char **map, int lines, int line_len, t_solong *tracker);
 void    get_player_position(char **map, t_solong *tracker);
 void	ft_strlcpy(char *dst, char *src, size_t dstsize);
-int is_valid_path(char **map, t_solong *tracker);
+int     is_valid_path(char **map, t_solong *tracker);
 char	**ft_split(char const *s, char c);
+int import_xpms(void *mlx, t_img img);
+int ft_handle_esc(int keycode, void *ptr);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(char *s, char c);
 t_solong    *locate_struct(int fd);
-char    *copy_map(char **map);
 int     ft_count_lines(char **map);
 int     ft_strlen(const char *s); 
 char	*get_next_line(int fd);
-int ft_count_lines(char **map);
+int     ft_count_lines(char **map);
 char	*ft_strdup(char *str);
 char	*cut_str(char *s);
 char    **get_map(int fd);

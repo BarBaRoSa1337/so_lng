@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/04 12:01:29 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/06 12:25:12 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int check_dimentions(char **map)
         }
     }
     i = 0;
-    if ((line_len == lines) || (lines < 3 || line_len < 5))
+    if ((line_len == lines) || (lines < 3 && line_len < 5) || line_len > 10 || lines > 5)
     {
         return (0);
     }
@@ -59,6 +59,7 @@ t_solong    *locate_struct(int fd)
     if (!tracker)
         return (NULL);
     tracker->map = get_map(fd);
+    tracker->fd = fd;
     tracker->exit = 0;
     tracker->coins = 0;
     tracker->player = 0;
