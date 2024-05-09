@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/06 15:22:02 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/09 10:40:16 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ t_solong    *locate_struct(int fd)
     tracker->fd = fd;
     tracker->exit = 0;
     tracker->coins = 0;
-    tracker->player = 0;
+    tracker->n_player = 0;
+    tracker->moves = 0;
     tracker->y = ft_strlen(tracker->map[0]);
-    get_player_position(tracker->map, tracker);
+    get_player_position(tracker->map, tracker, 'P');
     tracker->x = ft_count_lines(tracker->map);
     return (tracker);
 }
@@ -85,12 +86,12 @@ int    check_elements(char **map, t_solong *tracker)
             else if (map[i][j] == 'E')
                 tracker->exit += 1;
             else if (map[i][j] == 'P')
-                tracker->player += 1;
+                tracker->n_player += 1;
             ++j;
         }
         ++i;
     }
-    if (tracker->coins < 1 || tracker->player != 1 || tracker->exit != 1)
+    if (tracker->coins < 1 || tracker->n_player != 1 || tracker->exit != 1)
         return (0);   
     return (1);
 }

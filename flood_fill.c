@@ -6,13 +6,13 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:10:44 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/05 09:23:37 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:54:36 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void    get_player_position(char **map, t_solong *tracker)
+void    get_player_position(char **map, t_solong *tracker, char c)
 {
     int i;
     int j;
@@ -23,10 +23,15 @@ void    get_player_position(char **map, t_solong *tracker)
         j = 0;
         while (map[i][j])
         {
-            if (map[i][j] == 'P')
+            if (c == 'P' && map[i][j] == 'P')
             {
                 tracker->x_player = i;
                 tracker->y_player = j;
+            }
+            else if (c == 'E' && map[i][j] == 'E')
+            {
+                tracker->img_h = i;
+                tracker->img_w = j;
             }
             ++j;
         }
@@ -40,7 +45,7 @@ void    ft_flood_fill(int x, int y, char **map)
     {
         map[x][y] = 'X';
         ft_flood_fill(x + 1, y, map);
-        ft_flood_fill(x - 1, y, map);
+        ft_flood_fill(x - 1, y, map); 
         ft_flood_fill(x, y + 1, map);
         ft_flood_fill(x, y - 1, map);
     }

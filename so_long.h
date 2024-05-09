@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:48 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/06 15:09:15 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/09 10:39:09 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,31 @@
 
 #  define BUFFER_SIZE 13
 #   define PXL 50
+#define UP 119
+#define DOWN 115
+#define RIGHT 100
+#define LEFT 97
+#define ESC 65307
+
+#include <string.h>
+#include <limits.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
 #include "./minilibx-linux/mlx.h"
 
-typedef struct s_img
+typedef struct s_solong
 {
+    int     x_player;
+    int     y_player;
+    int     n_player;
+    char    **map;
+    int     coins;
+    int     exit;
+    int     fd;
+    int     x;
+    int     y;
     void    *win;
     void    *mlx;
     void    *back_ground;
@@ -31,30 +48,22 @@ typedef struct s_img
     void    *player;
     void    *bomb;
     void    *wall;
+    void    *enem;
+    int     enem_x;
+    int     enem_y;
     int     img_w;
     int     img_h;
-}       t_img;
-
-typedef struct s_solong
-{
-    int     x_player;
-    int     y_player;
-    int     player;
-    char    **map;
-    int     coins;
-    int     exit;
-    int     fd;
-    int     x;
-    int     y;
-}   t_solong;
+    int     moves;
+}       t_solong;
 
 int     is_valid_map(char **map, int lines, int line_len, t_solong *tracker);
-void    get_player_position(char **map, t_solong *tracker);
+void    get_player_position(char **map, t_solong *tracker, char c);
 void	ft_strlcpy(char *dst, char *src, size_t dstsize);
 int     is_valid_path(char **map, t_solong *tracker);
+char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
-int import_xpms(void *mlx, void *win, t_img *img);
-int ft_handle_esc(int keycode, void *ptr);
+int   select_move(int keycode, t_solong *img);
+int import_xpms(void *mlx, void *win, t_solong *img);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(char *s, char c);
 t_solong    *locate_struct(int fd);
