@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/09 10:40:16 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/11 19:08:37 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_solong    *locate_struct(int fd)
     tracker->coins = 0;
     tracker->n_player = 0;
     tracker->moves = 0;
+    tracker->exit = 1;
     tracker->y = ft_strlen(tracker->map[0]);
     get_player_position(tracker->map, tracker, 'P');
     tracker->x = ft_count_lines(tracker->map);

@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 11:20:16 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/09 11:22:24 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/11 19:28:35 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int import_xpms(void *mlx, void *win, t_solong *img)
     img->c_door = mlx_xpm_file_to_image(mlx, "./images/c_door.xpm",  &img->img_w, &img->img_h);
     img->o_door = mlx_xpm_file_to_image(mlx, "./images/o_door.xpm",  &img->img_w, &img->img_h);
     img->bomb = mlx_xpm_file_to_image(mlx, "./images/bomb.xpm",  &img->img_w, &img->img_h);
+	img->enem = mlx_xpm_file_to_image(mlx, "./images/enemy.xpm",  &img->img_w, &img->img_h);
+	img->bomb_on = mlx_xpm_file_to_image(mlx, "./images/bomb_on.xpm",  &img->img_w, &img->img_h);
     img->wall = mlx_xpm_file_to_image(mlx, "./images/wall.xpm",  &img->img_w, &img->img_h);
     if (!img->bomb || !img->wall || !img->o_door || !img->c_door || !img->player || !img->back_ground)
         return (0);
@@ -98,3 +100,29 @@ char    **get_map(int fd)
     map = ft_split(buff, '\n');
     return (free(buff), map);
 }
+
+void	ft_putstr(char *str, char flag)
+{
+	int	i;
+
+	if (flag == 'M')
+		ft_putstr("Moves:", 'N');
+	i = -1;
+	while (str[++i])
+		write(1, &str[i], 1);
+	write(1, "\n", 1);
+}
+
+// void	ft_exit(t_solong *track)
+// {
+// 	char **map;
+// 	int	i;
+
+// 	i = -1;
+// 	mlx_clear_window(track->mlx, track->win);
+// 	map = track->map;
+// 	while (map[++i])
+// 		free (map[i]);
+// 	free (map);
+// 	free (track);
+// }
