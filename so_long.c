@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:10:25 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/11 19:27:38 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/12 10:49:34 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void    ft_move(int new_x, int new_y, t_solong *img)
         mlx_put_image_to_window(img->mlx, img->win, img->wall, (PXL * 1), (PXL * 0));
         ft_putstr(str, 'M');
         mlx_string_put(img->mlx, img->win, 10, 25, 200, "MOVES");
-        mlx_string_put(img->mlx, img->win, 60, 25, 200, ft_itoa(img->moves));
+        mlx_string_put(img->mlx, img->win, 70, 25, 200, ft_itoa(img->moves));
         img->moves++;
     }
 }
@@ -106,31 +106,18 @@ void    put_images(t_solong *img)
     }
 }
 
-int move_enemy(int x, int y ,t_solong *track)
+void    move_enemy(int x, int y, t_solong *track)
 {
-    char    **map;
-    int     flag;
+    int i;
 
-    map = track->map;
-    flag = track->exit;
-    if (flag == 1 && map[x][y - 1] != '1' && map[x][y - 1] != 'E' && map[x][y - 1] != 'C')
+    i = 0;
+    while (i < 100000)
     {
-        mlx_put_image_to_window(track->mlx, track->win, track->back_ground, (PXL * y), (PXL * x));
-                usleep(133);
-        mlx_put_image_to_window(track->mlx, track->win, track->enem, (PXL * (y - 1)), (PXL * x));
+        if ((i % 10000))
+            mlx_put_image_to_window(track->mlx, track->win, track->enemy_hit, (PXL * y), (PXL * x));
+        i += 4;
     }
-    if (map[x][y - 1] == '1' || map[x][y - 1] == 'E' || map[x][y - 1] == 'C')
-        track->exit = 0;
-    if (flag == 0 && map[x][y + 1] != '1' && map[x][y + 1] != 'E' && map[x][y + 1] != 'C')
-        mlx_put_image_to_window(track->mlx, track->win, track->back_ground, (PXL * y), (PXL * x));
-    {
-        usleep(133);
-        mlx_put_image_to_window(track->mlx, track->win, track->enem, (PXL * (y + 1)), (PXL * x));
-        flag = 'V';
-    }
-    if (map[x][y + 1] == '1' || map[x][y + 1] == 'E' || map[x][y + 1] == 'C')
-        track->exit = 1;
-    return (1);
+    mlx_put_image_to_window(track->mlx, track->win, track->enem, (PXL * y), (PXL * x));
 }
 
 int ft_patrol(t_solong *tracker)
@@ -147,36 +134,7 @@ int ft_patrol(t_solong *tracker)
         while (map[i][j])
         {
             if (map[i][j] == 'V')
-                move_enemy(i, j,tracker);
-            else if (map[i][j] == 'v')
-                move_enemy(i, j,tracker);
-            ++j;             
-        }
-        ++i;
-    }
-    return (1);
-}
-
-int ft_exploit(t_solong *tracker)
-{
-    char    **map;
-    int i;
-    int j;
-
-    i = 0;
-    map = tracker->map;
-    while (map[i])
-    {
-        j = 0;
-        while (map[i][j])
-        {
-            if (map[i][j] == 'C')
-            {
-                mlx_put_image_to_window(tracker->mlx, tracker->win, tracker->bomb_on, (PXL * j), (PXL * i));
-                usleep(133);
-                mlx_put_image_to_window(tracker->mlx, tracker->win, tracker->bomb, (PXL * j), (PXL * i));
-                usleep(133);
-            }
+                move_enemy(i, j, tracker);
             ++j;
         }
         ++i;
@@ -193,11 +151,10 @@ int main(int ac, char **ar)
     if (ac < 2)
         return (0);
     tracker = locate_struct(open(ar[1], O_RDONLY));
-    if (!is_valid_map(tracker->map, ft_count_lines(tracker->map), ft_strlen(tracker->map[0]), tracker) || !is_valid_path(get_map(tracker->fd), tracker))
+    if (is_valid_map(tracker->map, ft_count_lines(tracker->map), ft_strlen(tracker->map[0]), tracker))
     {
-        
         printf("not a valid map\n");
-        ft_exit(tracker);
+        // ft_exit(tracker);
     }
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, tracker->y * PXL , tracker->x * PXL, "so long :)");
@@ -207,5 +164,4 @@ int main(int ac, char **ar)
     mlx_hook(mlx_win, 2, 1L<<0, select_move, tracker);
 	mlx_loop(mlx);
     return (0);
-    
 }

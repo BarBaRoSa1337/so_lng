@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:48 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/11 19:25:07 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/12 09:53:14 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ typedef struct s_solong
     void    *bomb_on;
     void    *wall;
     void    *enem;
-    int     enem_x;
-    int     enem_y;
+    void    *enemy_hit;
     int     img_w;
     int     img_h;
     int     moves;

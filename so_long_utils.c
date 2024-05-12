@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 11:20:16 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/11 19:28:35 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/12 10:54:28 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int import_xpms(void *mlx, void *win, t_solong *img)
     img->o_door = mlx_xpm_file_to_image(mlx, "./images/o_door.xpm",  &img->img_w, &img->img_h);
     img->bomb = mlx_xpm_file_to_image(mlx, "./images/bomb.xpm",  &img->img_w, &img->img_h);
 	img->enem = mlx_xpm_file_to_image(mlx, "./images/enemy.xpm",  &img->img_w, &img->img_h);
+	img->enemy_hit = mlx_xpm_file_to_image(mlx, "./images/enemy_hit.xpm",  &img->img_w, &img->img_h);
 	img->bomb_on = mlx_xpm_file_to_image(mlx, "./images/bomb_on.xpm",  &img->img_w, &img->img_h);
     img->wall = mlx_xpm_file_to_image(mlx, "./images/wall.xpm",  &img->img_w, &img->img_h);
     if (!img->bomb || !img->wall || !img->o_door || !img->c_door || !img->player || !img->back_ground)
@@ -89,11 +90,15 @@ char    **get_map(int fd)
 
     buff = NULL;
     tmp = get_next_line(fd);
+	if (!tmp)
+		return (NULL);
     while (tmp)
     {
         buff = ft_strjoin(buff, tmp);
         free (tmp);
         tmp = get_next_line(fd);
+		if (!tmp)
+			return (free(buff), NULL);
     }
     close(fd);
     buff = ft_strjoin(buff, "\n");
@@ -113,16 +118,17 @@ void	ft_putstr(char *str, char flag)
 	write(1, "\n", 1);
 }
 
-// void	ft_exit(t_solong *track)
-// {
-// 	char **map;
-// 	int	i;
+void	ft_exit(t_solong *track)
+{
+	char **map;
+	int	i;
 
-// 	i = -1;
-// 	mlx_clear_window(track->mlx, track->win);
-// 	map = track->map;
-// 	while (map[++i])
-// 		free (map[i]);
-// 	free (map);
-// 	free (track);
-// }
+	// i = -1;
+	// mlx_clear_window(track->mlx, track->win);
+	// map = track->map;
+	// while (map[++i])
+	// 	free (map[i]);
+	// free (map);
+	// free (track);
+	exit(0);
+}
