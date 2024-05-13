@@ -6,12 +6,49 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/12 10:53:41 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/13 09:44:04 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+int	ft_strcmp(char *s1, char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+		{
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
+		++i;
+	}
+	return (0);
+}
+
+int check_name(char *str)
+{
+    int i;
+    int len;
+
+    i = 0;
+    len = 0;
+    while (str[i])
+    {
+        if (ft_strcmp(&str[i], ".ber") == 0)
+        {
+            printf("%s\n", str + i);
+            if (ft_strlen(&str[i]) == 4 && ft_strlen(str) > 4)
+                return (1);
+            else
+                return (0);
+        }
+        ++i;
+    }
+    return (0);
+}
 int ft_count_lines(char **map)
 {
     int lines;
@@ -59,6 +96,8 @@ t_solong    *locate_struct(int fd)
     if (!tracker)
         return (NULL);
     tracker->map = get_map(fd);
+    if (!tracker->map)
+        return (free(tracker), NULL);
     tracker->fd = fd;
     tracker->exit = 0;
     tracker->coins = 0;

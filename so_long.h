@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:48 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/12 09:53:14 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/13 09:43:28 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void    get_player_position(char **map, t_solong *tracker, char c);
 void	ft_strlcpy(char *dst, char *src, size_t dstsize);
 int     is_valid_path(char **map, t_solong *tracker);
 char	*ft_itoa(int n);
+int check_name(char *str);
 void	ft_putstr(char *str, char flag);
 void	ft_exit(t_solong *track);
 char	**ft_split(char const *s, char c);

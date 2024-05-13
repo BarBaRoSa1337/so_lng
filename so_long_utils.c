@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 11:20:16 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/12 10:54:28 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/13 09:29:40 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,8 @@ char    **get_map(int fd)
         buff = ft_strjoin(buff, tmp);
         free (tmp);
         tmp = get_next_line(fd);
-		if (!tmp)
-			return (free(buff), NULL);
     }
-    close(fd);
+    close(fd);  
     buff = ft_strjoin(buff, "\n");
     map = ft_split(buff, '\n');
     return (free(buff), map);

@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:10:25 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/12 10:49:34 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/13 09:43:37 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,17 +151,18 @@ int main(int ac, char **ar)
     if (ac < 2)
         return (0);
     tracker = locate_struct(open(ar[1], O_RDONLY));
-    if (is_valid_map(tracker->map, ft_count_lines(tracker->map), ft_strlen(tracker->map[0]), tracker))
+    if (check_name(ar[1]) == 0)
     {
-        printf("not a valid map\n");
+        printf("Error\n not a valid map\n");
+        exit(0);
         // ft_exit(tracker);
     }
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, tracker->y * PXL , tracker->x * PXL, "so long :)");
-    import_xpms(mlx, mlx_win, tracker);
-    put_images(tracker);
-    mlx_loop_hook(tracker->mlx, ft_patrol, tracker);
-    mlx_hook(mlx_win, 2, 1L<<0, select_move, tracker);
-	mlx_loop(mlx);
+	// mlx = mlx_init();
+	// mlx_win = mlx_new_window(mlx, tracker->y * PXL , tracker->x * PXL, "so long :)");
+    // import_xpms(mlx, mlx_win, tracker);
+    // put_images(tracker);
+    // mlx_loop_hook(tracker->mlx, ft_patrol, tracker);
+    // mlx_hook(mlx_win, 2, 1L<<0, select_move, tracker);
+	// mlx_loop(mlx);
     return (0);
 }
