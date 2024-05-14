@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:10:44 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/14 10:37:17 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/14 10:57:05 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,34 @@ void    ft_flood_fill(int x, int y, char **map)
         map[x][y] = 'X';
 }
 
+char    **copy_map(t_solong *tracker)
+{
+    int lines = tracker->x + 1;
+    int line_len = tracker->y + 1;
+    int i = -1;
+    int j;
+
+    char    **map;
+    char    **copy;
+
+    map = tracker->map;
+    copy = malloc(sizeof(char *) * lines);
+    if(!copy)
+        return (NULL);
+    while (copy[++i])
+        copy[i] = malloc(line_len);
+    copy[i] = NULL;
+    i = -1;
+    while (map[++i])
+    {
+        j = -1;
+        while (map[i][++j])
+            copy[i][j] = map[i][j];
+        if (map[i][j] == '\0')
+            copy[i][j] = '\0';
+    }
+    return (copy);
+}
 
 int is_valid_path(t_solong *tracker)
 {
@@ -63,8 +91,7 @@ int is_valid_path(t_solong *tracker)
 
     i = -1;
     found = 0;
-    close (tracker->fd);
-    map = get_map(tracker->fd);
+    map = copy_map(tracker);
     ft_flood_fill(tracker->x_player, tracker->y_player, map);
     while (map[i])
     {

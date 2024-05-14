@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/14 10:33:47 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/14 10:56:06 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ int is_valid_map(char **map, int lines, int line_len, t_solong *tracker)
             ++j;
         }
     }
+    printf("x %d y %d\n", tracker->x, tracker->y);
     if ((check_elements(map, tracker) || check_dimentions(map)) || is_valid_path(tracker))
         return (1);
     return (0);

@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:10:25 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/14 10:27:25 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/14 10:42:02 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ int main(int ac, char **ar)
     if (ac < 2)
         return (0);
     tracker = locate_struct(ar[1]);
+    printf("x %d y%d\n", tracker->x, tracker->y);
     if (!check_name(ar[1]) || !tracker)
     {
         ft_printf("Error\nاسم الخريطة غير صحيح\n");
