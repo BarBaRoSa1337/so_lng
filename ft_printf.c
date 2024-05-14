@@ -6,12 +6,11 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 10:28:06 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/14 10:28:15 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/14 11:08:42 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 void	ft_putnbr_fd(int n, int *len)
 {
@@ -76,9 +75,9 @@ static int	put_type_in_place(char c, va_list args)
 
 int	ft_printf(const char *format, ...)
 {
-	va_list	args;
-	size_t	count;
-	size_t	i;
+	va_list args;
+	size_t count;
+	size_t i;
 
 	i = 0;
 	count = 0;

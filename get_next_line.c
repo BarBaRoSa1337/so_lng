@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 15:19:44 by achakour          #+#    #+#             */
-/*   Updated: 2024/03/22 17:09:58 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/14 11:09:47 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_strchr(char *s, char c)
 	return (NULL);
 }
 
-char	*process_str(char	*buff, char	**tmp)
+char	*process_str(char *buff, char **tmp)
 {
 	*tmp = cut_str(buff);
 	return (ft_strdup(buff + ft_strlen(*tmp)));
@@ -84,7 +84,7 @@ char	*get_next_line(int fd)
 	}
 	free(tmp);
 	if (!buff || !buff[0])
-		return (free (buff), NULL);
+		return (free(buff), NULL);
 	swap = buff;
 	buff = process_str(buff, &tmp);
 	return (free(swap), tmp);
