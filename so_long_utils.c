@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 11:20:16 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/13 09:29:40 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/14 10:33:04 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,51 +82,58 @@ int import_xpms(void *mlx, void *win, t_solong *img)
     return (1);
 } 
 
+
+int	ft_putchar_fd(char c, int fd)
+{
+	return (write(fd, &c, 1));
+}
+
 char    **get_map(int fd)
 {
     char    **map;
     char    *buff;
     char    *tmp;
 
-    buff = NULL;
     tmp = get_next_line(fd);
-	if (!tmp)
-		return (NULL);
+    buff = NULL;
     while (tmp)
     {
+		if (tmp[0] == '\n')
+			return (free(buff), NULL);
         buff = ft_strjoin(buff, tmp);
         free (tmp);
         tmp = get_next_line(fd);
     }
-    close(fd);  
+    close(fd);
     buff = ft_strjoin(buff, "\n");
     map = ft_split(buff, '\n');
     return (free(buff), map);
 }
 
-void	ft_putstr(char *str, char flag)
+int	ft_exit(t_solong *track)
 {
-	int	i;
+	char	**map;
+	int		i;
 
-	if (flag == 'M')
-		ft_putstr("Moves:", 'N');
 	i = -1;
-	while (str[++i])
-		write(1, &str[i], 1);
-	write(1, "\n", 1);
-}
-
-void	ft_exit(t_solong *track)
-{
-	char **map;
-	int	i;
-
-	// i = -1;
-	// mlx_clear_window(track->mlx, track->win);
-	// map = track->map;
-	// while (map[++i])
-	// 	free (map[i]);
-	// free (map);
-	// free (track);
+		mlx_destroy_image(track->mlx, track->back_ground);
+		mlx_destroy_image(track->mlx, track->bomb);
+		mlx_destroy_image(track->mlx, track->bomb_on);
+		mlx_destroy_image(track->mlx, track->player);
+		mlx_destroy_image(track->mlx, track->enem);
+		mlx_destroy_image(track->mlx, track->enemy_hit);
+		mlx_destroy_image(track->mlx, track->c_door);
+		mlx_destroy_image(track->mlx, track->o_door);
+		mlx_destroy_image(track->mlx, track->wall);
+		mlx_clear_window(track->mlx, track->win);
+	mlx_destroy_window(track->mlx, track->win);
+	mlx_destroy_display(track->mlx);
+	free (track->mlx);
+	map = track->map;
+	while (map[++i])
+		free (map[i]);
+	free (map);
+	free (track);
 	exit(0);
+	return (0);
 }

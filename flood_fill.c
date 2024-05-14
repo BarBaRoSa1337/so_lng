@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:10:44 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/11 18:43:56 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/14 10:37:17 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,18 @@ void    ft_flood_fill(int x, int y, char **map)
         map[x][y] = 'X';
 }
 
-int is_valid_path(char **map, t_solong *tracker)
-{
-    int found;
-    int i;
-    int j;
 
-    i = 0;
+int is_valid_path(t_solong *tracker)
+{
+    char    **map;
+    int     found;
+    int     i;
+    int     j;
+
+    i = -1;
     found = 0;
+    close (tracker->fd);
+    map = get_map(tracker->fd);
     ft_flood_fill(tracker->x_player, tracker->y_player, map);
     while (map[i])
     {
@@ -73,14 +77,11 @@ int is_valid_path(char **map, t_solong *tracker)
         }
         ++i;
     }
-    i = 0;
-    while (map[i])
-    {
-        printf("%s\n", map[i]);
-        ++i;
-        /* code */
-    }
+    i = -1;
+    while (map[++i])
+        free (map[i]);
+    free (map);
     if (found == 0)
-        return (1);
-    return (0);
+        return (0);
+    return (1);
 }

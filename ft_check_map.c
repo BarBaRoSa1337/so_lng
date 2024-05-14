@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/13 09:44:04 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/14 10:33:47 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ int	ft_strcmp(char *s1, char *s2)
 int check_name(char *str)
 {
     int i;
-    int len;
 
     i = 0;
-    len = 0;
     while (str[i])
     {
         if (ft_strcmp(&str[i], ".ber") == 0)
         {
-            printf("%s\n", str + i);
             if (ft_strlen(&str[i]) == 4 && ft_strlen(str) > 4)
                 return (1);
             else
@@ -49,6 +46,7 @@ int check_name(char *str)
     }
     return (0);
 }
+
 int ft_count_lines(char **map)
 {
     int lines;
@@ -88,17 +86,20 @@ int check_dimentions(char **map)
     return (0);
 }
 
-t_solong    *locate_struct(int fd)
+t_solong    *locate_struct(char *file)
 {
     t_solong    *tracker;
 
     tracker = malloc(sizeof(t_solong));
     if (!tracker)
         return (NULL);
-    tracker->map = get_map(fd);
+    tracker->fd = open(file, O_RDWR);
+    if (tracker->fd == -1)
+        return (free(tracker) , NULL);
+    tracker->map = get_map(tracker->fd);
     if (!tracker->map)
         return (free(tracker), NULL);
-    tracker->fd = fd;
+    tracker->file = file;
     tracker->exit = 0;
     tracker->coins = 0;
     tracker->n_player = 0;
@@ -131,7 +132,6 @@ int    check_elements(char **map, t_solong *tracker)
         }
         ++i;
     }
-    printf("C %d P %d E %d", tracker->coins, tracker->n_player, tracker->exit);
     if (tracker->coins < 1 || tracker->n_player != 1 || tracker->exit != 1)
         return (1);
     return (0);
@@ -161,7 +161,7 @@ int is_valid_map(char **map, int lines, int line_len, t_solong *tracker)
             ++j;
         }
     }
-    if ((check_elements(map, tracker) || check_dimentions(map)))
+    if ((check_elements(map, tracker) || check_dimentions(map)) || is_valid_path(tracker))
         return (1);
     return (0);
 }

@@ -1,10 +1,10 @@
 
 SRCS	= ft_check_map.c ft_lbft_split.c get_next_line_utils.c get_next_line.c flood_fill.c \
-	so_long.c so_long_utils.c
+	so_long.c so_long_utils.c ft_printf.c
 
 OBJ = $(SRCS:.c=.o)
 
-CFLAGS =  #-fsanitize=address -g3#-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 NAME = so_long
 AR = ar rcs
 RM = rm -f
