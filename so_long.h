@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:48 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/14 11:11:44 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:35:48 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_solong
 	void	*c_door;
 	void	*player;
 	void	*bomb;
-	void	*bomb_on;
 	void	*wall;
 	void	*enem;
 	void	*enemy_hit;
@@ -67,7 +66,6 @@ void		ft_strlcpy(char *dst, char *src, size_t dstsize);
 char		*ft_itoa(int n);
 int			check_name(char *str);
 int			ft_putchar_fd(char c, int fd);
-void		ft_putstr(char *str, char flag);
 int			ft_exit(t_solong *track);
 char		**ft_split(char const *s, char c);
 int			select_move(int keycode, t_solong *img);
