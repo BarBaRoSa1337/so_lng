@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:10:25 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/15 15:30:19 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/16 10:11:32 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,17 @@ void	ft_move(int new_x, int new_y, t_solong *s)
 
 	map = s->map;
 	handle_coins(map, s);
-	if (map[new_x][new_y] == 'V')
-		ft_exit(s);
-	if (map[new_x][new_y] == 'E')
+	if (map[new_x][new_y] == 'E' || map[new_x][new_y] == 'V')
 	{
-		if (s->coins == 0)
+		if (s->coins == 0 || map[new_x][new_y] == 'V')
+		{
+			ft_printf("Moves : %d\n", s->moves);
 			ft_exit(s);
+		}
 	}
 	else
 	{
+		ft_printf("Moves : %d\n", s->moves);
 		str = ft_itoa(s->moves);
 		mlx_put_image_to_window(s->mlx, s->win, s->back_ground, (PXL * s->y_player), (PXL * s->x_player));
 		s->x_player = new_x;
@@ -155,10 +157,10 @@ int	ft_patrol(t_solong *s)
                 ft_sleep();
                 ft_sleep();
                 ft_sleep();
+                ft_sleep();
+                ft_sleep();
+                ft_sleep();
                 mlx_put_image_to_window(s->mlx, s->win, s->enem, (PXL * j), (PXL * i));
-                ft_sleep();
-                ft_sleep();
-                ft_sleep();
             }
 		}
 	}

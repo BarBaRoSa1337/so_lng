@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/15 15:34:24 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/16 09:53:44 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_solong	*locate_struct(char *file)
 	tracker->exit = 0;
 	tracker->coins = 0;
 	tracker->n_player = 0;
-	tracker->moves = 0;
+	tracker->moves = 1;
 	tracker->exit = 0;
 	tracker->y = ft_strlen(tracker->map[0]);
 	get_player_position(tracker->map, tracker, 'P');
@@ -147,8 +147,8 @@ int	is_valid_map(char **map, int lines, int line_len, t_solong *tracker)
 		return (1);
 	while (map[++i])
 	{
-		j = 0;
-		while (map[i][j])
+		j = -1;
+		while (map[i][++j])
 		{
 			if ((i == 0 || i == (lines - 1)) && map[i][j] != '1')
 			{
@@ -158,11 +158,10 @@ int	is_valid_map(char **map, int lines, int line_len, t_solong *tracker)
 			{
 				return (1);
 			}
-			++j;
 		}
 	}
-	if ((check_elements(map, tracker) || check_dimentions(map)))
-		// || is_valid_path(tracker))
+	if ((check_elements(map, tracker) || check_dimentions(map))
+		|| is_valid_path(tracker))
 		return (1);
 	return (0);
 }
