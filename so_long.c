@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:10:25 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/16 10:11:32 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/18 09:21:24 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,21 @@ void	ft_free(t_solong *track)
 	exit(1);
 }
 
+void	free_strct(t_solong *tacker)
+{
+	char	**map;
+	int	i;
+
+	map = tacker->map;
+	if (!map)
+	    return ;
+	i = 0;
+	while (map[i])
+		free (map[i]);
+	free (map);
+	free (tacker);
+}
+
 int	main(int ac, char **ar)
 {
 	t_solong	*tracker;
@@ -194,7 +209,7 @@ int	main(int ac, char **ar)
 	if (!check_name(ar[1]) || !tracker)
 	{
 		ft_printf("Error\nاسم الخريطة غير صحيح\n");
-		return (1);
+		return (free_strct(tracker), 1);
 	}
 	if (is_valid_map(tracker->map, ft_count_lines(tracker->map),
 			ft_strlen(tracker->map[0]), tracker))
