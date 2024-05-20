@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:10:25 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/18 09:21:24 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:42:30 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ void	free_strct(t_solong *tacker)
 		free (map[i]);
 	free (map);
 	free (tacker);
+	exit(1);
 }
 
 int	main(int ac, char **ar)
@@ -206,10 +207,10 @@ int	main(int ac, char **ar)
 	if (ac < 2)
 		return (0);
 	tracker = locate_struct(ar[1]);
-	if (!check_name(ar[1]) || !tracker)
+	if (check_name(ar[1]) == 0 || !tracker)
 	{
-		ft_printf("Error\nاسم الخريطة غير صحيح\n");
-		return (free_strct(tracker), 1);
+		ft_printf("Error\nاسم او معالم الخريطة غير صحيح\n");
+		exit(1);
 	}
 	if (is_valid_map(tracker->map, ft_count_lines(tracker->map),
 			ft_strlen(tracker->map[0]), tracker))
