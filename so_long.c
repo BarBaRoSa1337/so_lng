@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:10:25 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/20 14:42:30 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:18:13 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,18 @@ void	handle_coins(char **map, t_solong *img)
 	}
 }
 
+void	put_str(t_solong *s, int x, int y, char *str)
+{
+	mlx_put_image_to_window(s->mlx, s->win, s->player, (PXL * y), (PXL * x));
+	mlx_put_image_to_window(s->mlx, s->win, s->wall, (PXL * 1), (PXL * 0));
+	mlx_string_put(s->mlx, s->win, 10, 25, 200, "MOVES");
+	mlx_string_put(s->mlx, s->win, 70, 25, 200, str);
+}
+
 void	ft_move(int new_x, int new_y, t_solong *s)
 {
-	char	*str;
 	char	**map;
+	char	*str;
 
 	map = s->map;
 	handle_coins(map, s);
@@ -49,10 +57,7 @@ void	ft_move(int new_x, int new_y, t_solong *s)
 		mlx_put_image_to_window(s->mlx, s->win, s->back_ground, (PXL * s->y_player), (PXL * s->x_player));
 		s->x_player = new_x;
 		s->y_player = new_y;
-		mlx_put_image_to_window(s->mlx, s->win, s->player, (PXL * new_y), (PXL * new_x));
-		mlx_put_image_to_window(s->mlx, s->win, s->wall, (PXL * 1), (PXL * 0));
-		mlx_string_put(s->mlx, s->win, 10, 25, 200, "MOVES");
-		mlx_string_put(s->mlx, s->win, 70, 25, 200, str);
+		put_str(s, new_x, new_y, str);
 		s->moves++;
 		free(str);
 	}
@@ -207,7 +212,7 @@ int	main(int ac, char **ar)
 	if (ac < 2)
 		return (0);
 	tracker = locate_struct(ar[1]);
-	if (check_name(ar[1]) == 0 || !tracker)
+	if (check_name(ar[1]) || !tracker)
 	{
 		ft_printf("Error\nاسم او معالم الخريطة غير صحيح\n");
 		exit(1);

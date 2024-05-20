@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/20 14:37:04 by achakour         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:08:28 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ int	check_name(char *str)
 	{
 		if (ft_strcmp(&str[i], ".ber") == 0)
 		{
-			if (ft_strlen(&str[i]) == 4 && ft_strlen(str) > 4)
+			if (ft_strlen(&str[i]) == 4 && ft_strlen(str) > 9)
 				return (0);
 			else
 				return (1);
 		}
-		else
-			return (0);
 		++i;
 	}
 	return (1);
