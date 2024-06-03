@@ -1,7 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   extra_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/03 18:52:59 by achakour          #+#    #+#             */
+/*   Updated: 2024/06/03 18:58:15 by achakour         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "so_long.h"
 
 void	put_images2(t_solong *s, int i, int j)
 {
+	char	**map;
+
+	map = s->map;
 	if (map[i][j] == 'C')
 		mlx_put_image_to_window(s->mlx, s->win, s->bomb, (PXL * j), (PXL * i));
 	else if (map[i][j] == 'V')

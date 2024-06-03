@@ -1,6 +1,6 @@
 
 SRCS	= ft_check_map.c ft_lbft_split.c get_next_line_utils.c get_next_line.c flood_fill.c \
-	so_long.c so_long_utils.c ft_printf.c
+	so_long.c so_long_utils.c ft_printf.c extra_utils.c extra_utils2.c
 
 OBJ = $(SRCS:.c=.o)
 

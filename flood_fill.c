@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:10:44 by achakour          #+#    #+#             */
-/*   Updated: 2024/06/01 14:34:18 by achakour         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:55:55 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	is_valid_path(t_solong *tracker)
 
 	i = -1;
 	found = 0;
-	map = copy_map(tracker);
+	map = copy_map(tracker, tracker->map);
 	ft_flood_fill(tracker->x_player, tracker->y_player, map);
 	while (map[++i])
 	{
