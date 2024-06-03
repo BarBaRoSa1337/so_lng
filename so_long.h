@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:48 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/15 10:35:48 by achakour         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:41:17 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char		*ft_itoa(int n);
 int			check_name(char *str);
 int			ft_putchar_fd(char c, int fd);
 int			ft_exit(t_solong *track);
+void		put_images2(t_solong *s, int i, int j);
 char		**ft_split(char const *s, char c);
 int			select_move(int keycode, t_solong *img);
 int			import_xpms(void *mlx, void *win, t_solong *img);

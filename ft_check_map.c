@@ -6,46 +6,11 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/20 15:08:28 by achakour         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:39:13 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		if ((unsigned char)s1[i] != (unsigned char)s2[i])
-		{
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		}
-		++i;
-	}
-	return (0);
-}
-
-int	check_name(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_strcmp(&str[i], ".ber") == 0)
-		{
-			if (ft_strlen(&str[i]) == 4 && ft_strlen(str) > 9)
-				return (0);
-			else
-				return (1);
-		}
-		++i;
-	}
-	return (1);
-}
 
 int	ft_count_lines(char **map)
 {

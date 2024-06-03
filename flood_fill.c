@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:10:44 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/20 14:38:49 by achakour         ###   ########.fr       */
+/*   Updated: 2024/06/01 14:34:18 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	get_player_position(char **map, t_solong *tracker, char c)
 
 void	ft_flood_fill(int x, int y, char **map)
 {
-	if (map[x][y] != '1' && map[x][y] != 'X' && map[x][y] != 'E' && map[x][y] != 'V')
+	if (map[x][y] != '1' && map[x][y] != 'X' && map[x][y] != 'E'
+		&& map[x][y] != 'V')
 	{
 		map[x][y] = 'X';
 		ft_flood_fill(x + 1, y, map);
@@ -55,11 +56,10 @@ void	ft_flood_fill(int x, int y, char **map)
 	}
 }
 
-char	**copy_map(t_solong *tracker)
+char	**copy_map(t_solong *tracker, char **map)
 {
 	int		line_len;
 	char	**copy;
-	char	**map;
 	int		lines;
 	int		i;
 	int		j;

@@ -6,11 +6,30 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 15:19:44 by achakour          #+#    #+#             */
-/*   Updated: 2024/05/14 11:09:47 by achakour         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:44:14 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	check_name(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_strcmp(&str[i], ".ber") == 0)
+		{
+			if (ft_strlen(&str[i]) == 4 && ft_strlen(str) > 9)
+				return (0);
+			else
+				return (1);
+		}
+		++i;
+	}
+	return (1);
+}
 
 char	*cut_str(char *s)
 {
