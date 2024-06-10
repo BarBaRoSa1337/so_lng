@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:51 by achakour          #+#    #+#             */
-/*   Updated: 2024/06/03 18:39:13 by achakour         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:15:07 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	check_elements(char **map, t_solong *tracker)
 				tracker->exit += 1;
 			else if (map[i][j] == 'P')
 				tracker->n_player += 1;
+			else if (map[i][j] != '1' && map[i][j] != 'V' && map[i][j] != '0')
+				return (1);
 			++j;
 		}
 		++i;

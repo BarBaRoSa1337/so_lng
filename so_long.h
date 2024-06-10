@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:12:48 by achakour          #+#    #+#             */
-/*   Updated: 2024/06/03 18:58:40 by achakour         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:04:56 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ char		*ft_strchr(char *s, char c);
 t_solong	*locate_struct(char *file);
 int			ft_count_lines(char **map);
 int			ft_strcmp(char *s1, char *s2);
-void	put_str(t_solong *s, int x, int y, char *str);
-void	handle_coins(char **map, t_solong *img);
-void	ft_move(int new_x, int new_y, t_solong *s);
+void		put_str(t_solong *s, int x, int y, char *str);
+void		handle_coins(char **map, t_solong *img);
+void		ft_move(int new_x, int new_y, t_solong *s);
 int			ft_strlen(const char *s);
 char		*get_next_line(int fd);
 int			ft_count_lines(char **map);
-void	ft_free(t_solong *track);
+void		ft_free(t_solong *track);
 char		*ft_strdup(char *str);
 char		*cut_str(char *s);
 char		**get_map(int fd);

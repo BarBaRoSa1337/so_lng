@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:10:44 by achakour          #+#    #+#             */
-/*   Updated: 2024/06/03 18:55:55 by achakour         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:16:13 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_flood_fill(int x, int y, char **map)
 		ft_flood_fill(x, y + 1, map);
 		ft_flood_fill(x, y - 1, map);
 	}
-	if (map[x][y] == 'E')
+	if (map[x][y] == 'E' || map[x][y] == 'V')
 	{
 		map[x][y] = 'X';
 	}

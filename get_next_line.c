@@ -6,7 +6,7 @@
 /*   By: achakour <achakour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 15:19:44 by achakour          #+#    #+#             */
-/*   Updated: 2024/06/03 18:44:14 by achakour         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:05:21 by achakour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_name(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
